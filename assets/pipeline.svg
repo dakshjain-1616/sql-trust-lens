@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 240" width="860" height="240" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#57606a"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1a7f37"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#cf222e"/>
+    </marker>
+    <linearGradient id="hdrGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0969da"/>
+      <stop offset="100%" stop-color="#8250df"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="240" rx="12" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="860" height="36" rx="12" fill="url(#hdrGrad)"/>
+  <rect x="0" y="24" width="860" height="12" fill="url(#hdrGrad)"/>
+  <text x="430" y="23" text-anchor="middle" fill="white" font-size="13" font-weight="600" letter-spacing="0.3">SQL Trust Lens — Validation Pipeline</text>
+
+  <!-- ══════════════════════════════════════════════════════
+       PHASE BOXES  (y-center = 102)
+       widths: 120, 120, 140, split 74/74, 120
+       gaps = 18 each, arrows span gap
+       x positions: 14, 152, 290, 450(green)/450(red), 608
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- Phase 1: Natural Language (gray) -->
+  <rect x="14" y="52" width="122" height="100" rx="8" fill="white" stroke="#d0d7de" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="14" y="52" width="122" height="22" rx="8" fill="#eaeef2"/>
+  <rect x="14" y="66" width="122" height="8" fill="#eaeef2"/>
+  <text x="75" y="67" text-anchor="middle" fill="#57606a" font-size="10" font-weight="700" letter-spacing="0.2">NATURAL LANGUAGE</text>
+  <text x="75" y="92" text-anchor="middle" fill="#24292f" font-size="9.5" font-family="'SFMono-Regular', Consolas, monospace">Show all users</text>
+  <text x="75" y="106" text-anchor="middle" fill="#24292f" font-size="9.5" font-family="'SFMono-Regular', Consolas, monospace">from New York</text>
+  <text x="75" y="128" text-anchor="middle" fill="#57606a" font-size="8.5">User prompt</text>
+
+  <!-- Arrow 1 → 2 -->
+  <line x1="138" y1="102" x2="154" y2="102" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Phase 2: LLM Backend (blue) -->
+  <rect x="156" y="52" width="126" height="100" rx="8" fill="white" stroke="#0969da" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="156" y="52" width="126" height="22" rx="8" fill="#ddf4ff"/>
+  <rect x="156" y="66" width="126" height="8" fill="#ddf4ff"/>
+  <text x="219" y="67" text-anchor="middle" fill="#0969da" font-size="10" font-weight="700">LLM BACKEND</text>
+  <text x="219" y="92" text-anchor="middle" fill="#0969da" font-size="9.5" font-weight="600">OpenRouter</text>
+  <text x="219" y="106" text-anchor="middle" fill="#57606a" font-size="9">llama.cpp  ·  Mock</text>
+  <text x="219" y="121" text-anchor="middle" fill="#57606a" font-size="8.5">↓</text>
+  <rect x="168" y="128" width="102" height="14" rx="4" fill="#ddf4ff"/>
+  <text x="219" y="138" text-anchor="middle" fill="#0969da" font-size="8.5" font-weight="600">generates SQL</text>
+
+  <!-- Arrow 2 → 3 -->
+  <line x1="284" y1="102" x2="300" y2="102" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Phase 3: Schema Validation (yellow) -->
+  <rect x="302" y="52" width="140" height="100" rx="8" fill="white" stroke="#d4a72c" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="302" y="52" width="140" height="22" rx="8" fill="#fff8c5"/>
+  <rect x="302" y="66" width="140" height="8" fill="#fff8c5"/>
+  <text x="372" y="67" text-anchor="middle" fill="#7d4e00" font-size="10" font-weight="700">SCHEMA VALIDATION</text>
+  <text x="372" y="89" text-anchor="middle" fill="#24292f" font-size="9.5">Trust score  ·  0 – 100</text>
+  <text x="372" y="104" text-anchor="middle" fill="#24292f" font-size="9.5">Hallucination check</text>
+  <text x="372" y="119" text-anchor="middle" fill="#24292f" font-size="9.5">Did-you-mean hints</text>
+  <text x="372" y="137" text-anchor="middle" fill="#57606a" font-size="8.5">EvalEngine · DuckDB</text>
+
+  <!-- Arrow 3 → split: fork point at x=460 -->
+  <line x1="444" y1="102" x2="454" y2="102" stroke="#57606a" stroke-width="1.5"/>
+  <!-- Upper fork (green) -->
+  <line x1="454" y1="102" x2="454" y2="77" stroke="#1a7f37" stroke-width="1.5"/>
+  <line x1="454" y1="77" x2="466" y2="77" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <!-- Lower fork (red) -->
+  <line x1="454" y1="102" x2="454" y2="127" stroke="#cf222e" stroke-width="1.5"/>
+  <line x1="454" y1="127" x2="466" y2="127" stroke="#cf222e" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+
+  <!-- Phase 4a: Execute (green) -->
+  <rect x="468" y="58" width="86" height="38" rx="7" fill="white" stroke="#1a7f37" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="468" y="58" width="86" height="38" rx="7" fill="#dafbe1" fill-opacity="0.5"/>
+  <text x="511" y="73" text-anchor="middle" fill="#1a7f37" font-size="9.5" font-weight="700">EXECUTE</text>
+  <text x="511" y="87" text-anchor="middle" fill="#1a7f37" font-size="8.5">can_execute = true</text>
+
+  <!-- Phase 4b: Blocked (red) -->
+  <rect x="468" y="108" width="86" height="38" rx="7" fill="white" stroke="#cf222e" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="468" y="108" width="86" height="38" rx="7" fill="#ffebe9" fill-opacity="0.6"/>
+  <text x="511" y="123" text-anchor="middle" fill="#cf222e" font-size="9.5" font-weight="700">BLOCKED</text>
+  <text x="511" y="137" text-anchor="middle" fill="#cf222e" font-size="8.5">can_execute = false</text>
+
+  <!-- Label between forks -->
+  <text x="456" y="106" fill="#57606a" font-size="8" font-style="italic">gate</text>
+
+  <!-- Arrows 4 → 5 (both merge into phase 5) -->
+  <line x1="556" y1="77" x2="566" y2="77" stroke="#1a7f37" stroke-width="1.5"/>
+  <line x1="566" y1="77" x2="566" y2="102" stroke="#57606a" stroke-width="1.5"/>
+  <line x1="556" y1="127" x2="566" y2="127" stroke="#cf222e" stroke-width="1.5"/>
+  <line x1="566" y1="127" x2="566" y2="102" stroke="#57606a" stroke-width="1.5"/>
+  <line x1="566" y1="102" x2="582" y2="102" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Phase 5: Results (gray) -->
+  <rect x="584" y="52" width="134" height="100" rx="8" fill="white" stroke="#d0d7de" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="584" y="52" width="134" height="22" rx="8" fill="#eaeef2"/>
+  <rect x="584" y="66" width="134" height="8" fill="#eaeef2"/>
+  <text x="651" y="67" text-anchor="middle" fill="#57606a" font-size="10" font-weight="700">RESULTS</text>
+  <text x="651" y="90" text-anchor="middle" fill="#24292f" font-size="9.5">DataFrame / Error</text>
+  <text x="651" y="105" text-anchor="middle" fill="#24292f" font-size="9.5">Trust report</text>
+  <text x="651" y="120" text-anchor="middle" fill="#24292f" font-size="9.5">Suggestions</text>
+  <text x="651" y="138" text-anchor="middle" fill="#57606a" font-size="8.5">ValidationResult</text>
+
+  <!-- ── FEATURE PILLS ── -->
+  <!-- Complexity -->
+  <rect x="150" y="172" width="142" height="20" rx="10" fill="white" stroke="#d0d7de" stroke-width="1" filter="url(#shadow)"/>
+  <text x="221" y="185" text-anchor="middle" fill="#24292f" font-size="9.5">Complexity analysis</text>
+  <!-- History export -->
+  <rect x="305" y="172" width="130" height="20" rx="10" fill="white" stroke="#d0d7de" stroke-width="1" filter="url(#shadow)"/>
+  <text x="370" y="185" text-anchor="middle" fill="#24292f" font-size="9.5">History export</text>
+  <!-- Batch -->
+  <rect x="448" y="172" width="126" height="20" rx="10" fill="white" stroke="#d0d7de" stroke-width="1" filter="url(#shadow)"/>
+  <text x="511" y="185" text-anchor="middle" fill="#24292f" font-size="9.5">Batch validation</text>
+
+  <!-- ── FOOTER ── -->
+  <text x="430" y="222" text-anchor="middle" fill="#57606a" font-size="9">
+    DuckDB in-memory or file  ·  Northwind schema bundled  ·  Streamlit UI on :8501
+  </text>
+</svg>

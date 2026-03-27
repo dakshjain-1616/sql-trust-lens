@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#57606a"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0969da"/>
+      <stop offset="100%" stop-color="#8250df"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="300" rx="12" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="860" height="36" rx="12" fill="url(#headerGrad)"/>
+  <rect x="0" y="24" width="860" height="12" fill="url(#headerGrad)"/>
+  <text x="430" y="23" text-anchor="middle" fill="white" font-size="13" font-weight="600" letter-spacing="0.3">SQL Trust Lens — Trust Score Calculation</text>
+
+  <!-- ── LEFT PANEL: Input SQL ── -->
+  <rect x="18" y="48" width="192" height="96" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="18" y="48" width="192" height="22" rx="8" fill="#eaeef2"/>
+  <rect x="18" y="62" width="192" height="8" fill="#eaeef2"/>
+  <text x="114" y="63" text-anchor="middle" fill="#57606a" font-size="10.5" font-weight="600" letter-spacing="0.2">INPUT SQL</text>
+  <text x="30" y="85" fill="#24292f" font-size="9.5" font-family="'SFMono-Regular', Consolas, monospace">SELECT c.name, o.total</text>
+  <text x="30" y="99" fill="#24292f" font-size="9.5" font-family="'SFMono-Regular', Consolas, monospace">FROM customers c</text>
+  <text x="30" y="113" fill="#24292f" font-size="9.5" font-family="'SFMono-Regular', Consolas, monospace">JOIN ghost_orders o</text>
+  <text x="30" y="127" fill="#24292f" font-size="9.5" font-family="'SFMono-Regular', Consolas, monospace">  ON c.id = o.customer_id</text>
+
+  <!-- Arrow: left → middle -->
+  <line x1="212" y1="96" x2="248" y2="96" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── MIDDLE PANEL: Analysis boxes ── -->
+  <!-- Table Analysis -->
+  <rect x="250" y="48" width="230" height="80" rx="8" fill="white" stroke="#0969da" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="250" y="48" width="230" height="22" rx="8" fill="#ddf4ff"/>
+  <rect x="250" y="62" width="230" height="8" fill="#ddf4ff"/>
+  <text x="365" y="63" text-anchor="middle" fill="#0969da" font-size="10.5" font-weight="700">TABLE ANALYSIS</text>
+  <text x="262" y="83" fill="#24292f" font-size="10">
+    <tspan fill="#1a7f37" font-weight="600">customers ✓</tspan>
+    <tspan fill="#57606a">  ·  </tspan>
+    <tspan fill="#cf222e" font-weight="600">ghost_orders ✗</tspan>
+  </text>
+  <text x="262" y="99" fill="#57606a" font-size="9.5">1 / 2 tables valid</text>
+  <rect x="262" y="108" width="110" height="14" rx="4" fill="#ddf4ff"/>
+  <text x="317" y="118" text-anchor="middle" fill="#0969da" font-size="9.5" font-weight="700">Table score: 50%</text>
+
+  <!-- Column Analysis -->
+  <rect x="250" y="148" width="230" height="80" rx="8" fill="white" stroke="#8250df" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="250" y="148" width="230" height="22" rx="8" fill="#fbefff"/>
+  <rect x="250" y="162" width="230" height="8" fill="#fbefff"/>
+  <text x="365" y="163" text-anchor="middle" fill="#8250df" font-size="10.5" font-weight="700">COLUMN ANALYSIS</text>
+  <text x="262" y="183" fill="#24292f" font-size="10">
+    <tspan fill="#1a7f37" font-weight="600">c.name ✓</tspan>
+    <tspan fill="#57606a">  ·  </tspan>
+    <tspan fill="#cf222e" font-weight="600">o.total ✗</tspan>
+  </text>
+  <text x="262" y="199" fill="#57606a" font-size="9.5">1 / 2 columns valid</text>
+  <rect x="262" y="208" width="116" height="14" rx="4" fill="#fbefff"/>
+  <text x="320" y="218" text-anchor="middle" fill="#8250df" font-size="9.5" font-weight="700">Column score: 50%</text>
+
+  <!-- Formula connector pill -->
+  <rect x="285" y="130" width="160" height="18" rx="9" fill="#fff8c5" stroke="#d4a72c" stroke-width="1"/>
+  <text x="365" y="142" text-anchor="middle" fill="#7d4e00" font-size="9" font-weight="600">Trust = (Table × 0.5) + (Column × 0.5)</text>
+
+  <!-- Arrow: middle → right -->
+  <line x1="482" y1="136" x2="518" y2="136" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── RIGHT PANEL: Result card ── -->
+  <rect x="520" y="48" width="192" height="182" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="520" y="48" width="192" height="22" rx="8" fill="#fff8c5"/>
+  <rect x="520" y="62" width="192" height="8" fill="#fff8c5"/>
+  <text x="616" y="63" text-anchor="middle" fill="#7d4e00" font-size="10.5" font-weight="600" letter-spacing="0.2">VALIDATION RESULT</text>
+
+  <!-- Big score number -->
+  <text x="616" y="115" text-anchor="middle" fill="#d4a72c" font-size="52" font-weight="800" letter-spacing="-2">50</text>
+  <text x="616" y="131" text-anchor="middle" fill="#57606a" font-size="10.5" font-weight="600" letter-spacing="1">TRUST SCORE</text>
+
+  <!-- Divider -->
+  <line x1="536" y1="140" x2="696" y2="140" stroke="#eaeef2" stroke-width="1"/>
+
+  <!-- Status badge -->
+  <rect x="543" y="148" width="146" height="18" rx="9" fill="#ffebe9" stroke="#cf222e" stroke-width="1"/>
+  <text x="616" y="160" text-anchor="middle" fill="#cf222e" font-size="9.5" font-weight="700">can_execute: ✗  BLOCKED</text>
+
+  <!-- Suggestion -->
+  <text x="536" y="184" fill="#57606a" font-size="9.5">Suggestion:</text>
+  <text x="536" y="197" fill="#8250df" font-size="9.5" font-weight="600">ghost_orders → orders</text>
+
+  <!-- Confidence -->
+  <text x="536" y="215" fill="#57606a" font-size="9.5">Confidence: <tspan fill="#0969da" font-weight="600">0.71</tspan></text>
+
+  <!-- ── TIER STRIP ── -->
+  <rect x="18" y="214" width="494" height="28" rx="6" fill="white" stroke="#d0d7de" stroke-width="1"/>
+  <!-- Red tier -->
+  <rect x="22" y="218" width="155" height="20" rx="4" fill="#ffebe9"/>
+  <text x="99" y="231" text-anchor="middle" fill="#cf222e" font-size="9.5" font-weight="700">0 – 49  ·  Hallucination</text>
+  <!-- Yellow tier -->
+  <rect x="181" y="218" width="155" height="20" rx="4" fill="#fff8c5"/>
+  <text x="258" y="231" text-anchor="middle" fill="#7d4e00" font-size="9.5" font-weight="700">50 – 79  ·  Partial</text>
+  <!-- Green tier -->
+  <rect x="340" y="218" width="168" height="20" rx="4" fill="#dafbe1"/>
+  <text x="424" y="231" text-anchor="middle" fill="#1a7f37" font-size="9.5" font-weight="700">80 – 100  ·  Safe to run</text>
+
+  <!-- Active tier marker (yellow) -->
+  <rect x="181" y="214" width="155" height="28" rx="5" fill="none" stroke="#d4a72c" stroke-width="2"/>
+
+  <!-- ── FOOTER ── -->
+  <text x="430" y="284" text-anchor="middle" fill="#57606a" font-size="9">
+    50% table weight + 50% column weight  ·  Wildcards inherit table score  ·  did-you-mean via difflib
+  </text>
+</svg>
