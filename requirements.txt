@@ -1,0 +1,21 @@
+# Core
+streamlit>=1.32.0
+duckdb>=0.10.0
+pydantic>=2.0.0
+pandas>=2.0.0
+rich>=13.0.0
+
+# Testing
+pytest>=8.0.0
+
+# LLM integration – OpenRouter (openai-compatible API)
+# Install to use OPENROUTER_API_KEY for real text-to-SQL generation:
+openai>=1.0.0
+
+# .env file support
+python-dotenv>=1.0.0
+
+# Optional – local LLM inference (heavy install, requires C compiler)
+# Install separately if you want a Llama-based backend:
+#   pip install llama-cpp-python
+# llama-cpp-python>=0.2.56

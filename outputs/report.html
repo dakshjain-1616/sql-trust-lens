@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>SQL Trust Lens – Demo Report</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 40px; background: #f8f9fa; color: #212529; }
+    h1 { color: #0066cc; }
+    table { border-collapse: collapse; width: 100%; background: #fff;
+             box-shadow: 0 1px 4px rgba(0,0,0,.12); border-radius: 8px; overflow: hidden; }
+    th { background: #343a40; color: #fff; padding: 10px 14px; text-align: left; }
+    td { padding: 9px 14px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .badge { padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; }
+    .summary { background: #fff; padding: 20px; border-radius: 8px;
+                box-shadow: 0 1px 4px rgba(0,0,0,.12); margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 SQL Trust Lens – Demo Report</h1>
+  <p>Generated: 2026-03-27T00:00:00Z</p>
+
+  <div class="summary">
+    <h2>Summary</h2>
+    <p>Total scenarios: <b>8</b> &nbsp;|&nbsp;
+       Passed: <b style="color:#28a745">8</b> &nbsp;|&nbsp;
+       Failed: <b style="color:#dc3545">0</b></p>
+  </div>
+
+  <h2>Validation Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>SQL</th>
+        <th>Trust Score</th><th>Executable</th><th>Issues</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>tc1</code></td>
+          <td>Valid wildcard query</td>
+          <td><code style="font-size:0.8em">SELECT * FROM users</code></td>
+          <td style="color:#28a745;font-weight:bold">100.0%</td>
+          <td>Yes</td>
+          <td style="font-size:0.85em">—</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc2</code></td>
+          <td>Missing table</td>
+          <td><code style="font-size:0.8em">SELECT * FROM fake_table</code></td>
+          <td style="color:#dc3545;font-weight:bold">0.0%</td>
+          <td>No</td>
+          <td style="font-size:0.85em">• Table 'fake_table' does not exist in schema</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc3</code></td>
+          <td>Invalid column</td>
+          <td><code style="font-size:0.8em">SELECT invalid_col FROM users</code></td>
+          <td style="color:#ffc107;font-weight:bold">50.0%</td>
+          <td>No</td>
+          <td style="font-size:0.85em">• Column 'invalid_col' does not exist in table 'users'</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc4</code></td>
+          <td>Mock model disabled – fallback SQL</td>
+          <td><code style="font-size:0.8em">SELECT * FROM users LIMIT 10</code></td>
+          <td style="color:#28a745;font-weight:bold">100.0%</td>
+          <td>Yes</td>
+          <td style="font-size:0.85em">—</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc5</code></td>
+          <td>Valid JOIN query</td>
+          <td><code style="font-size:0.8em">SELECT c.company_name, o.order_id, o.order_date FROM customers…</code></td>
+          <td style="color:#28a745;font-weight:bold">100.0%</td>
+          <td>Yes</td>
+          <td style="font-size:0.85em">—</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc6</code></td>
+          <td>Multiple hallucinated columns</td>
+          <td><code style="font-size:0.8em">SELECT ghost_col, phantom_field, shadow_attr FROM products</code></td>
+          <td style="color:#ffc107;font-weight:bold">50.0%</td>
+          <td>No</td>
+          <td style="font-size:0.85em">• Column 'ghost_col' does not exist in table 'products'<br>• Column 'phantom_field' does not exist in table 'products'<br>• Column 'shadow_attr' does not exist in table 'products'</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc7</code></td>
+          <td>Mixed valid + invalid columns</td>
+          <td><code style="font-size:0.8em">SELECT product_name, unit_price, fake_discount FROM products</code></td>
+          <td style="color:#28a745;font-weight:bold">83.3%</td>
+          <td>No</td>
+          <td style="font-size:0.85em">• Column 'fake_discount' does not exist in table 'products'</td>
+          <td>✅ PASS</td>
+        </tr>
+        <tr>
+          <td><code>tc8</code></td>
+          <td>Fully valid specific columns</td>
+          <td><code style="font-size:0.8em">SELECT username, email, is_active FROM users WHERE is_active = tr…</code></td>
+          <td style="color:#28a745;font-weight:bold">100.0%</td>
+          <td>Yes</td>
+          <td style="font-size:0.85em">—</td>
+          <td>✅ PASS</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:40px">Database Schema (Northwind)</h2>
+  <table>
+    <thead><tr><th>Table</th><th>Columns</th></tr></thead>
+    <tbody>
+      <tr><td><b>categories</b></td><td>category_id, category_name, description</td></tr>
+      <tr><td><b>customers</b></td><td>customer_id, company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax</td></tr>
+      <tr><td><b>employees</b></td><td>employee_id, last_name, first_name, title, birth_date, hire_date, address, city, country, home_phone, notes, reports_to</td></tr>
+      <tr><td><b>order_details</b></td><td>order_id, product_id, unit_price, quantity, discount</td></tr>
+      <tr><td><b>orders</b></td><td>order_id, customer_id, employee_id, order_date, required_date, shipped_date, freight, ship_name, ship_city, ship_country</td></tr>
+      <tr><td><b>products</b></td><td>product_id, product_name, supplier_id, category_id, unit_price, units_in_stock, units_on_order, discontinued</td></tr>
+      <tr><td><b>suppliers</b></td><td>supplier_id, company_name, contact_name, city, country, phone</td></tr>
+      <tr><td><b>users</b></td><td>user_id, username, email, full_name, created_at, last_login, is_active</td></tr>
+    </tbody>
+  </table>
+
+  <footer style="margin-top:40px;color:#6c757d;font-size:0.85rem">
+    SQL Trust Lens · local-first schema validator ·
+    <a href="https://heyneo.so">Built with NEO</a>
+  </footer>
+</body>
+</html>

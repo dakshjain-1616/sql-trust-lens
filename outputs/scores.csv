@@ -1,0 +1,9 @@
+id,name,trust_score,confidence,can_execute,invalid_tables,invalid_columns,complexity_label,complexity_score,test_passed,validated_at
+tc1,Valid wildcard query,100.0,1.0,True,,,simple,0,True,2026-03-27T12:00:00.000000+00:00
+tc2,Missing table,0.0,1.0,False,fake_table,,simple,0,True,2026-03-27T12:00:00.001000+00:00
+tc3,Invalid column,50.0,1.0,False,,users:invalid_col,simple,0,True,2026-03-27T12:00:00.002000+00:00
+tc4,Mock model disabled – fallback SQL,100.0,1.0,True,,,simple,0,True,2026-03-27T12:00:00.003000+00:00
+tc5,Valid JOIN query,100.0,1.0,True,,,moderate,20,True,2026-03-27T12:00:00.004000+00:00
+tc6,Multiple hallucinated columns,50.0,1.0,False,,products:ghost_col;phantom_field;shadow_attr,simple,0,True,2026-03-27T12:00:00.005000+00:00
+tc7,Mixed valid + invalid columns,83.3,1.0,False,,products:fake_discount,simple,0,True,2026-03-27T12:00:00.006000+00:00
+tc8,Fully valid specific columns,100.0,1.0,True,,,simple,0,True,2026-03-27T12:00:00.007000+00:00
